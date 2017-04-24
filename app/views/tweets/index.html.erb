@@ -1,16 +1,20 @@
-<%= form_tag tweets_search_path, method: "post" do %>
-		<%= text_field_tag :search_query %>
-		<%= submit_tag("Search") %>
+
+<%= form_tag tweets_search_path, method: "post",class: "form-group" do %>
+		<div class="form-group">
+				<%= text_field_tag :search_query %>
+
+				<%= submit_tag("Search") %>
+		</div>
 <% end  %>
 
+<p>You searched for: <span><%= $search_query %></span></p>
 
-<%= $search_query %>
-<%= %>
 <p id="notice"><%= notice %></p>
 
-<h1> Searched Tweets</h1>
+<h1 style="text-align: center;"> Searched Tweets</h1>
 
-<table>
+<div class="container">
+<table class="table ">
   <thead>
     <tr>
       <th>Body</th>
@@ -26,23 +30,34 @@
         <td><%= tweet.body %></td>
         <td><%= tweet.sentiment %></td>
         <td><%= tweet.score %></td>
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%#= link_to 'Show', tweet %></td>
+        <td><%#= link_to 'Edit', edit_tweet_path(tweet) %></td>
+        <td><%#= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
+<%#= link_to 'New Tweet', new_tweet_path %>
 
 
-<%= geo_chart Tweet.group(:sentiment).count %>
-<%= pie_chart Tweet.group(:sentiment).count %>
-<%= bar_chart Tweet.group(:sentiment).count %>
-<%= line_chart Tweet.group(:sentiment).count %>
-<%= column_chart Tweet.group(:sentiment).count %>
+<div class="container">
+				<div class="row">
+						<div class="col">
+								<%= geo_chart Tweet.group(:sentiment).count %>
+						</div>
+						<div class="col">
+								<%= pie_chart Tweet.group(:sentiment).count %>
+						</div>
+				</div>
+</div>
+<div class="container" style="margin-top: 50px;">
+		<%= bar_chart Tweet.group(:sentiment).count %>
+</div>
+<div class="container">
+		<%= column_chart Tweet.group(:sentiment).count %>
+</div>
 
 

@@ -64,11 +64,15 @@ class TweetsController < ApplicationController
 
   def search
     $search_query = params[:search_query]
-    last_tweet = Tweet.last.id
-    Tweet.sync($search_query)
-    reloaded_last_tweet = Tweet.last.id
-    #$reloaded_tweets = Tweet.where(id: last_tweet..reloaded_last_tweet)
-    redirect_to tweets_path
+    if $search_query == ""
+      flash[:notice] = "Please enter the keyword"
+      redirect_to tweets_path
+    else
+      Tweet.delete_all
+      Tweet.sync($search_query)
+      @tweets = Tweet.all
+      redirect_to tweets_path
+    end 
   end 
 
   private
