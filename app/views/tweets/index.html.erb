@@ -1,0 +1,48 @@
+<%= form_tag tweets_search_path, method: "post" do %>
+		<%= text_field_tag :search_query %>
+		<%= submit_tag("Search") %>
+<% end  %>
+
+
+<%= $search_query %>
+<%= %>
+<p id="notice"><%= notice %></p>
+
+<h1> Searched Tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Sentiment</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+			<% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.body %></td>
+        <td><%= tweet.sentiment %></td>
+        <td><%= tweet.score %></td>
+        <td><%= link_to 'Show', tweet %></td>
+        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tweet', new_tweet_path %>
+
+
+<%= geo_chart Tweet.group(:sentiment).count %>
+<%= pie_chart Tweet.group(:sentiment).count %>
+<%= bar_chart Tweet.group(:sentiment).count %>
+<%= line_chart Tweet.group(:sentiment).count %>
+<%= column_chart Tweet.group(:sentiment).count %>
+
+
