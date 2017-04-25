@@ -1,0 +1,35 @@
+#+TITLE: Twitter-Sentimentalizer
+#+OPTIONS: H:1 num:nil toc:t html-postamble:nil timestamp:nil 
+#+AUTHOR: neymarsabin
+#+EMAIL: reddevil.sabin@gmail.com
+
+* Introduction
+	Twitter-sentimentalizer is a rails application that gathers tweets from twitter related to a searched keyword and performs sentiment analysis on them.Here is a screenshot: 
+	#+ATTR_HTML: :width 800px :height 600px
+	[[file:./vendor/assets/images/sentiment.png]]
+
+
+* Dependencies 
+	This application uses following gems: 
+	- gem 'twitter'
+  - gem 'sentimental'
+  -	gem 'chartkick'
+	- gem 'groupdate'
+
+
+* To Run the application 
+	Clone this repository into your computer: 
+	#+BEGIN_SRC bash 
+	git clone git@github.com:neymarsabin/twitter-sentimentalizer.git
+	#+END_SRC
+	This application use sqlite as the development database.Move into the application directory and perform: 
+	#+BEGIN_SRC bash
+	rails db:create
+	rails db:migrate
+	#+END_SRC
+	This will create the database and perform nescessary migrations.And, 
+	#+BEGIN_SRC bash 
+	rails server -p 8000
+	#+END_SRC
+
+	
